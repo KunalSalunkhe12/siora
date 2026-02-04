@@ -3,6 +3,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Custom Color Palette */
+  --color-beige-primary: #CCBCAD;
+  --color-beige-light: #F0EEED;
+  --color-beige-medium: #D2C8BE;
+  --color-brown-dark: #3b2a1e;
+  --color-brown-medium-1: #6b5a4d;
+  --color-brown-medium-2: #7d6c5e;
+  --color-brown-darker: #3d2816;
+  --color-gray-label: #C5C5C5;
+  --color-menu-bg: #302E2D33;
+  --color-dropdown-bg: #1a1a1a;
+  --color-dropdown-hover: #2a2a2a;
 }
 
 @theme inline {
@@ -11,6 +24,19 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-haffer: var(--font-haffer);
+  
+  /* Custom Colors */
+  --color-beige-primary: var(--color-beige-primary);
+  --color-beige-light: var(--color-beige-light);
+  --color-beige-medium: var(--color-beige-medium);
+  --color-brown-dark: var(--color-brown-dark);
+  --color-brown-medium-1: var(--color-brown-medium-1);
+  --color-brown-medium-2: var(--color-brown-medium-2);
+  --color-brown-darker: var(--color-brown-darker);
+  --color-gray-label: var(--color-gray-label);
+  --color-menu-bg: var(--color-menu-bg);
+  --color-dropdown-bg: var(--color-dropdown-bg);
+  --color-dropdown-hover: var(--color-dropdown-hover);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,4 +50,33 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.btn-primary {
+  @apply px-6 py-2 bg-beige-primary text-brown-dark rounded-3xl uppercase tracking-[0.2em] font-semibold text-center cursor-pointer transition-transform duration-300 hover:scale-[1.03] active:scale-[0.97] whitespace-nowrap;
+}
+
+.btn-secondary {
+  @apply px-6 py-2 bg-beige-primary text-brown-dark rounded-2xl uppercase tracking-widest font-semibold text-center cursor-pointer transition-transform duration-300 hover:scale-[1.03] active:scale-[0.97];
+}
+
+.btn-shimmer {
+  @apply relative overflow-hidden;
+}
+
+.btn-shimmer-effect {
+  @apply absolute inset-0 bg-linear-to-r from-white/10 via-white/40 to-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-700;
+}
+
+.text-para {
+  @apply text-sm leading-relaxed;
+}
+
+.heading {
+  @apply text-3xl font-medium tracking-[0.2em];
+}
+
+.letter-spaced {
+  @apply tracking-[0.2em];
 }
