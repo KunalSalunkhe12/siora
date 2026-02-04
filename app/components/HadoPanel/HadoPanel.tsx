@@ -83,7 +83,29 @@ export default function HadoPanel() {
         2.5
       );
 
-      // Slide in Dubai Islands section
+      if (ikigaiRef.current) {
+        const ikigaiElements = ikigaiRef.current.querySelectorAll(".blur-reveal-child");
+        if (ikigaiElements.length > 0) {
+          tl.fromTo(
+            ikigaiElements,
+            {
+              opacity: 0,
+              y: -6,
+              filter: "blur(6px)",
+            },
+            {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 1.2,
+              ease: "power3.out",
+              stagger: 0.1,
+            },
+            3.5
+          );
+        }
+      }
+
       tl.fromTo(
         dubaiIslandsRef.current,
         {
@@ -96,6 +118,29 @@ export default function HadoPanel() {
         },
         5.5
       );
+
+      if (dubaiIslandsRef.current) {
+        const dubaiElements = dubaiIslandsRef.current.querySelectorAll(".blur-reveal-child");
+        if (dubaiElements.length > 0) {
+          tl.fromTo(
+            dubaiElements,
+            {
+              opacity: 0,
+              y: -6,
+              filter: "blur(6px)",
+            },
+            {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 1.2,
+              ease: "power3.out",
+              stagger: 0.1,
+            },
+            7.5
+          );
+        }
+      }
     }, sectionRef);
 
     return () => ctx.revert();
