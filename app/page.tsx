@@ -1,9 +1,7 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import IkigaiSection from "./components/IkigaiSection";
-import HadoPanel from "./components/HadoPanel";
-import IkigaiPhilosophy from "./components/IkigaiPhilosophy";
-import DubaiIslandsSection from "./components/DubaiIsland";
+import HadoPanel from "./components/HadoPanel/HadoPanel";
 import DubaiMapSection from "./components/DubaiMapSection";
 import DeveloperSection from "./components/DeveloperSection";
 import GetInTouchSection from "./components/GetInTouchSection";
@@ -17,8 +15,6 @@ export default function Home() {
       <Hero />
       <IkigaiSection />
       <HadoPanel />
-      <IkigaiPhilosophy />
-      <DubaiIslandsSection />
       <DubaiMapSection />
       <DeveloperSection />
       <GetInTouchSection />

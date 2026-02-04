@@ -1,6 +1,6 @@
 "use client";
 
-import BlurReveal from "./BlurReveal";
+import BlurReveal from "../BlurReveal";
 
 export default function IkigaiPhilosophy() {
   return (

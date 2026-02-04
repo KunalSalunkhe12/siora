@@ -1,10 +1,10 @@
 "use client";
 
-import BlurReveal from "./BlurReveal";
+import BlurReveal from "../BlurReveal";
 
 export default function DubaiIslandsSection() {
   return (
-    <section className="h-[50vh] md:h-screen flex items-center justify-center bg-gradient-to-b from-beige-primary to-white">
+    <section className="h-[50vh] md:h-screen flex items-center justify-center bg-linear-to-b from-beige-primary to-white">
       <div className="w-[85%] md:w-[70%] text-center h-[30%] flex flex-col gap-5 items-center justify-center">
         <BlurReveal delay={0.25}>
           <h1 className="mx-auto uppercase text-xl md:text-3xl font-medium tracking-[0.3em] text-brown-dark md:w-[80%]">

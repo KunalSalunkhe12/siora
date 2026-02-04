@@ -3,12 +3,16 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import IkigaiPhilosophy from "./IkigaiPhilosophy";
+import DubaiIslandsSection from "./DubaiIsland";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HadoPanel() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoWrapRef = useRef<HTMLDivElement>(null);
+  const ikigaiRef = useRef<HTMLDivElement>(null);
+  const dubaiIslandsRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     if (typeof window !== "undefined" && window.innerWidth < 768) return;
@@ -18,7 +22,7 @@ export default function HadoPanel() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "150%",
+          end: "400%",
           scrub: 0.6,
           pin: true,
           anticipatePin: 1,
@@ -63,6 +67,34 @@ export default function HadoPanel() {
           ease: "power3.out",
         },
         1.2
+      );
+
+      // Slide in Ikigai Philosophy section
+      tl.fromTo(
+        ikigaiRef.current,
+        {
+          y: "100%",
+        },
+        {
+          y: "0%",
+          duration: 2.5,
+          ease: "power1.inOut",
+        },
+        2.5
+      );
+
+      // Slide in Dubai Islands section
+      tl.fromTo(
+        dubaiIslandsRef.current,
+        {
+          y: "100%",
+        },
+        {
+          y: "0%",
+          duration: 2.5,
+          ease: "power1.inOut",
+        },
+        5.5
       );
     }, sectionRef);
 
@@ -160,6 +192,21 @@ export default function HadoPanel() {
           >
             <source src="/videos/hado-thumbnail.webm" type="video/webm" />
           </video>
+        </div>
+
+        <div
+          ref={ikigaiRef}
+          className="absolute inset-0 z-20"
+        >
+          <IkigaiPhilosophy />
+        </div>
+
+        {/* Dubai Islands slides over Ikigai */}
+        <div
+          ref={dubaiIslandsRef}
+          className="absolute inset-0 z-30"
+        >
+          <DubaiIslandsSection />
         </div>
       </section>
     </>
