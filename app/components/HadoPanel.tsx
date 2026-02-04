@@ -104,7 +104,7 @@ export default function HadoPanel() {
               and the warmth of sunlight.
             </p>
             <div className="w-full mx-auto info3 mt-6 flex">
-              <button className="w-[60%] px-6 py-2 mx-auto rounded-2xl bg-[#CCBCAD] text-[#3b2a1e] uppercase text-[10px] tracking-widest font-semibold text-center cursor-pointer transition hover:scale-[1.03] active:scale-[0.97]">
+              <button className="btn-secondary w-[60%] mx-auto text-[10px]">
                 Explore Project
               </button>
             </div>
@@ -140,7 +140,7 @@ export default function HadoPanel() {
               </div>
             </div>
             <div className="w-full mx-auto info3 mt-6 flex">
-              <button className="w-[160px] px-6 py-2 rounded-2xl bg-[#CCBCAD] text-[#3b2a1e] uppercase text-[11px] tracking-widest font-semibold text-center cursor-pointer transition hover:scale-[1.03] active:scale-[0.97]">
+              <button className="btn-secondary w-[160px] text-[11px]">
                 Explore Project
               </button>
             </div>

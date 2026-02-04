@@ -32,7 +32,7 @@ export default function IkigaiSection() {
       tl.to({}, { duration: 1 });
 
       tl.to(sectionRef.current, {
-        backgroundColor: "#D2C8BE",
+        backgroundColor: "var(--color-beige-medium)",
         duration: 1,
       });
 
@@ -73,24 +73,24 @@ export default function IkigaiSection() {
   return (
     <section
       ref={sectionRef}
-      className="w-full h-screen flex items-center justify-center bg-[#F0EFEE] overflow-hidden relative"
+      className="w-full h-screen flex items-center justify-center bg-beige-light overflow-hidden relative"
       style={{ perspective: "1400px" }}
     >
       <div className="absolute inset-0 bg-black opacity-0 z-10" />
 
       <div className="absolute w-[85%] md:w-[65%] text-center h-[30%] flex gap-5 flex-col items-center justify-center">
         <BlurReveal>
-          <h1 className="mx-auto text-[#3d2816] text-2xl md:text-[32px] font-haffer font-normal tracking-widest md:w-[80%]">
+          <h1 className="mx-auto text-brown-darker text-2xl md:text-[32px] font-haffer font-normal tracking-widest md:w-[80%]">
             SIORA IS MORE THAN A NAME — IT IS THE INVISIBLE ARCHITECTURE OF THE
             MASTERPLAN
           </h1>
         </BlurReveal>
         <BlurReveal>
-          <p className="mx-auto md:w-[70%] mt-3 text-[#7d6c5e] text-sm font-haffer font-normal">
-            From Japanese thought, Sior evokes “the veil of the tide” — a delicate
+          <p className="mx-auto md:w-[70%] mt-3 text-brown-medium-2 text-para font-haffer font-normal">
+            From Japanese thought, Sior evokes "the veil of the tide" — a delicate
             intersection of movement and stillness. Rooted in Shio, meaning tide,
             and Ra, symbolizing silk and a refined weave, the name embodies the
-            ocean’s graceful rhythm and quiet power. Like silk shaped by water,
+            ocean's graceful rhythm and quiet power. Like silk shaped by water,
             the architecture flows with intention, where nature and design
             dissolve into one another.
           </p>

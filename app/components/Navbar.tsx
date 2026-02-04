@@ -204,7 +204,7 @@ const Navbar = () => {
                 href="#register"
                 className="cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
               >
-                <button className="uppercase px-6 py-2 bg-[#CCBCAD] text-black rounded-3xl cursor-pointer font-haffer whitespace-nowrap font-normal tracking-[0.2em]">
+                <button className="btn-primary font-normal">
                   REGISTER INTEREST
                 </button>
               </a>
@@ -215,7 +215,7 @@ const Navbar = () => {
 
       <div
         id="mobile-menu"
-        className="fixed top-0 h-screen -left-full w-screen lg:w-[45vw] bg-[#302E2D33] z-50 backdrop-blur-lg text-white ease-in-out"
+        className="fixed top-0 h-screen -left-full w-screen lg:w-[45vw] bg-menu-bg z-50 backdrop-blur-lg text-white ease-in-out"
       >
         <svg
           onClick={() => setIsMenuOpen(false)}

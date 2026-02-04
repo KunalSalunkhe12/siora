@@ -28,7 +28,7 @@ export default function DeveloperSection() {
     <section
       ref={ref}
       id="developer"
-      className="w-full bg-[#F0EEED] text-black flex flex-col items-center justify-center gap-8 px-10 py-24"
+      className="w-full bg-beige-light text-black flex flex-col items-center justify-center gap-8 px-10 py-24"
     >
       <div className="w-full lg:w-[40%] mb-8 lg:mb-0 text-center">
         <h5 className="dev-anim uppercase mb-4 tracking-widest">
