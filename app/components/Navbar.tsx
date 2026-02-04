@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -10,6 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showNavItems, setShowNavItems] = useState(false);
+  const hasMountedNavLinks = useRef(false);
+  const mobileMenuTlRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
     gsap.to("#navbar", {
@@ -20,31 +22,79 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    const linksSelector = "#mobile-menu .mobile-nav-link";
+
+    if (mobileMenuTlRef.current) {
+      mobileMenuTlRef.current.kill();
+      mobileMenuTlRef.current = null;
+    }
+
+    const tl = gsap.timeline();
+    mobileMenuTlRef.current = tl;
+
     if (isMenuOpen) {
-      gsap.to("#mobile-menu", {
-        left: 0,
-        duration: 0.6,
-        ease: "power2.inOut",
-      });
+      tl.fromTo(
+        "#mobile-menu",
+        { left: "-100%", autoAlpha: 0 },
+        {
+          left: 0,
+          autoAlpha: 1,
+          duration: 0.8,
+          ease: "power2.out",
+        }
+      ).fromTo(
+        linksSelector,
+        { x: -40, autoAlpha: 0 },
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: "power2.out",
+        },
+        "-=0.3"
+      );
     } else {
-      gsap.to("#mobile-menu", {
-        left: "-100%",
+      tl.to(linksSelector, {
+        x: -40,
+        autoAlpha: 0,
         duration: 0.6,
+        stagger: 0.12,
+        ease: "power2.in",
+      }).to("#mobile-menu", {
+        left: "-100%",
+        autoAlpha: 0,
+        duration: 0.8,
         ease: "power2.inOut",
       });
     }
+
+    return () => {
+      if (mobileMenuTlRef.current) {
+        mobileMenuTlRef.current.kill();
+        mobileMenuTlRef.current = null;
+      }
+    };
   }, [isMenuOpen]);
 
   useEffect(() => {
+    const navLinksSelector = "#navbar .nav-links";
+
+    if (!hasMountedNavLinks.current) {
+      gsap.set(navLinksSelector, { opacity: 0, y: -20 });
+      hasMountedNavLinks.current = true;
+      return;
+    }
+
     if (showNavItems) {
-      gsap.to("#navbar .nav-links", {
+      gsap.to(navLinksSelector, {
         opacity: 1,
         y: 0,
         duration: 0.5,
         ease: "power2.out",
       });
     } else {
-      gsap.to("#navbar .nav-links", {
+      gsap.to(navLinksSelector, {
         opacity: 0,
         y: -20,
         duration: 0.7,
@@ -53,11 +103,42 @@ const Navbar = () => {
     }
   }, [showNavItems]);
 
+  useEffect(() => {
+    const trigger = ScrollTrigger.create({
+      start: 0,
+      end: "max",
+      onUpdate: (self) => {
+        const direction = self.direction;
+        const scrollPos = self.scroll();
+
+        if (direction === 1 && scrollPos > 80) {
+          gsap.to("#navbar", {
+            y: -80,
+            autoAlpha: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        } else if (direction === -1) {
+          gsap.to("#navbar", {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        }
+      },
+    });
+
+    return () => {
+      trigger.kill();
+    };
+  }, []);
+
   return (
     <>
       <nav
         id="navbar"
-        className="h-17.5 lg:h-18.75 flex flex-col items-center justify-center w-screen fixed left-0 z-40 transition-all duration-[0.8s] -top-23.5 backdrop-blur-[10px] bg-black/30"
+        className="h-17.5 lg:h-18.75 flex flex-col items-center justify-center w-screen fixed left-0 z-40 -top-23.5 backdrop-blur-[10px] bg-black/30"
         onMouseLeave={() => setShowNavItems(false)}
       >
         <div className="container w-11/12 h-12.5 lg:h-13.75 flex items-center justify-start lg:justify-end letter-spaced text-sm relative">
@@ -98,7 +179,7 @@ const Navbar = () => {
                   href="/hado"
                   className="cursor-pointer transition-transform duration-300 hover:scale-[0.97]"
                 >
-                  <button className="uppercase letter-spaced font-primary font-light cursor-pointer">
+                  <button className="tracking-[0.2em] uppercase font-primary font-light cursor-pointer">
                     PROJECT
                   </button>
                 </a>
@@ -106,7 +187,7 @@ const Navbar = () => {
                   href="#location"
                   className="cursor-pointer transition-transform duration-300 hover:scale-[0.97]"
                 >
-                  <button className="uppercase letter-spaced font-primary font-light cursor-pointer">
+                  <button className="tracking-[0.2em] uppercase font-primary font-light cursor-pointer">
                     LOCATION
                   </button>
                 </a>
@@ -114,7 +195,7 @@ const Navbar = () => {
                   href="#developer"
                   className="cursor-pointer transition-transform duration-300 hover:scale-[0.97]"
                 >
-                  <button className="uppercase letter-spaced font-primary font-light cursor-pointer">
+                  <button className="tracking-[0.2em] uppercase font-primary font-light cursor-pointer">
                     DEVELOPER
                   </button>
                 </a>
@@ -123,7 +204,7 @@ const Navbar = () => {
                 href="#register"
                 className="cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
               >
-                <button className="uppercase px-6 py-2 bg-[#CCBCAD] text-black rounded-3xl cursor-pointer font-minerva-bold whitespace-nowrap">
+                <button className="uppercase px-6 py-2 bg-[#CCBCAD] text-black rounded-3xl cursor-pointer font-haffer whitespace-nowrap font-normal tracking-[0.2em]">
                   REGISTER INTEREST
                 </button>
               </a>
@@ -155,16 +236,32 @@ const Navbar = () => {
         <div className="flex flex-col justify-center items-end h-full uppercase">
           <div className="w-[85%] lg:w-[80%] relative">
             <div className="flex flex-col items-start gap-6 relative z-2 text-xl font-light *:cursor-pointer">
-              <a href="/hado" onClick={() => setIsMenuOpen(false)}>
+              <a
+                href="/hado"
+                onClick={() => setIsMenuOpen(false)}
+                className="mobile-nav-link"
+              >
                 <button className="uppercase letter-spaced">PROJECT</button>
               </a>
-              <a href="#location" onClick={() => setIsMenuOpen(false)}>
+              <a
+                href="#location"
+                onClick={() => setIsMenuOpen(false)}
+                className="mobile-nav-link"
+              >
                 <button className="uppercase letter-spaced">LOCATION</button>
               </a>
-              <a href="#developer" onClick={() => setIsMenuOpen(false)}>
+              <a
+                href="#developer"
+                onClick={() => setIsMenuOpen(false)}
+                className="mobile-nav-link"
+              >
                 <button className="uppercase letter-spaced">DEVELOPER</button>
               </a>
-              <a href="#register" onClick={() => setIsMenuOpen(false)}>
+              <a
+                href="#register"
+                onClick={() => setIsMenuOpen(false)}
+                className="mobile-nav-link"
+              >
                 <button className="uppercase border px-6 py-2 text-sm bg-transparent letter-spaced w-full max-w-xs font-primary font-light transition-transform duration-300 hover:scale-110 whitespace-nowrap">
                   REGISTER INTEREST
                 </button>
