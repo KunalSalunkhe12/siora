@@ -53,7 +53,7 @@ export default function DubaiMapSection() {
     <>
       {/* Mobile layout */}
       <section
-        id="location"
+        id="location-mobile"
         className="md:hidden min-h-screen relative overflow-hidden py-12"
       >
         <Image
@@ -89,6 +89,7 @@ export default function DubaiMapSection() {
 
       {/* Desktop layout */}
       <section
+        id="location"
         ref={sectionRef}
         className="hidden md:block h-screen relative overflow-hidden"
       >

@@ -237,14 +237,14 @@ const Navbar = () => {
           <div className="w-[85%] lg:w-[80%] relative">
             <div className="flex flex-col items-start gap-6 relative z-2 text-xl font-light *:cursor-pointer">
               <a
-                href="/hado"
+                href="#"
                 onClick={() => setIsMenuOpen(false)}
                 className="mobile-nav-link"
               >
                 <button className="uppercase letter-spaced">PROJECT</button>
               </a>
               <a
-                href="#location"
+                href="#location-mobile"
                 onClick={() => setIsMenuOpen(false)}
                 className="mobile-nav-link"
               >
