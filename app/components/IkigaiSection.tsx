@@ -85,7 +85,7 @@ export default function IkigaiSection() {
             MASTERPLAN
           </h1>
         </BlurReveal>
-        <BlurReveal>
+        <BlurReveal delay={1}>
           <p className="mx-auto md:w-[70%] mt-3 text-brown-medium-2 text-para font-haffer font-normal">
             From Japanese thought, Sior evokes "the veil of the tide" — a delicate
             intersection of movement and stillness. Rooted in Shio, meaning tide,
